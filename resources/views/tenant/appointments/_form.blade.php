@@ -1,0 +1,10 @@
+@php($appointment=$appointment??null)
+<div class="row g-3">
+<div class="col-md-6"><label class="form-label">Patient</label><select name="patient_id" class="form-select" required><option value="">Select</option>@foreach($patients as $p)<option value="{{ $p->id }}" @selected(old('patient_id',$appointment?->patient_id)==$p->id)>{{ $p->name }}</option>@endforeach</select></div>
+<div class="col-md-6"><label class="form-label">Doctor</label><select name="doctor_id" class="form-select" required><option value="">Select</option>@foreach($doctors as $d)<option value="{{ $d->id }}" @selected(old('doctor_id',$appointment?->doctor_id)==$d->id)>{{ $d->name }}</option>@endforeach</select></div>
+<div class="col-md-4"><label class="form-label">Date</label><input type="date" name="appointment_date" class="form-control" value="{{ old('appointment_date', optional($appointment?->appointment_date)->format('Y-m-d') ?? date('Y-m-d')) }}" required></div>
+<div class="col-md-4"><label class="form-label">Time</label><input type="time" name="appointment_time" class="form-control" value="{{ old('appointment_time', $appointment?->appointment_time ? substr($appointment->appointment_time,0,5) : '10:00') }}" required></div>
+<div class="col-md-4"><label class="form-label">Status</label><select name="status" class="form-select">@foreach(['scheduled','confirmed','completed','cancelled','no_show'] as $s)<option value="{{ $s }}" @selected(old('status',$appointment?->status??'scheduled')===$s)>{{ ucfirst(str_replace('_',' ',$s)) }}</option>@endforeach</select></div>
+<div class="col-12"><label class="form-label">Reason</label><input name="reason" class="form-control" value="{{ old('reason',$appointment?->reason) }}"></div>
+<div class="col-12"><label class="form-label">Notes</label><textarea name="notes" class="form-control" rows="2">{{ old('notes',$appointment?->notes) }}</textarea></div>
+</div>

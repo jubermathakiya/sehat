@@ -1,0 +1,905 @@
+/* Sehat – Medical SaaS Theme (Navy + Orange primary + Teal/Green accent) */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* Color swap applied: former teal/green roles → orange; former orange roles → teal/green */
+  --sehat-navy: #0B1F3A;
+  --sehat-navy-light: #123458;
+  --sehat-orange: #F97316;
+  --sehat-orange-hover: #ea580c;
+  --sehat-orange-soft: rgba(249, 115, 22, 0.12);
+  --sehat-teal: #0D9488;
+  --sehat-teal-light: #14b8a6;
+  --sehat-teal-soft: rgba(13, 148, 136, 0.12);
+  --sehat-surface: #F4F7FB;
+  --sehat-white: #FFFFFF;
+  --sehat-muted: #64748b;
+  --sehat-border: #e2e8f0;
+  --sehat-shadow: 0 1px 2px rgba(11, 31, 58, 0.04), 0 8px 24px rgba(11, 31, 58, 0.06);
+  --sehat-shadow-lg: 0 16px 48px rgba(11, 31, 58, 0.12);
+  --sehat-radius: 14px;
+  --sehat-radius-sm: 10px;
+  --sehat-sidebar-width: 264px;
+  --sehat-topbar-height: 64px;
+  --sehat-font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sehat-space: 1.5rem;
+  --sehat-control-h: 44px;
+
+  /* Primary action color = Orange (was teal/green) */
+  --sehat-primary: var(--sehat-orange);
+  --sehat-primary-hover: var(--sehat-orange-hover);
+  --sehat-primary-soft: var(--sehat-orange-soft);
+  --sehat-accent: var(--sehat-teal);
+  --sehat-accent-soft: var(--sehat-teal-soft);
+
+  --bs-primary: var(--sehat-primary);
+  --bs-body-bg: var(--sehat-surface);
+  --bs-body-color: #1e293b;
+  --bs-border-color: var(--sehat-border);
+  --bs-border-radius: var(--sehat-radius-sm);
+  --bs-link-color: var(--sehat-primary);
+  --bs-link-hover-color: var(--sehat-primary-hover);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body.sehat-app {
+  font-family: var(--sehat-font);
+  background: var(--sehat-surface);
+  color: #1e293b;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ——— Auth ——— */
+.sehat-auth-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--sehat-navy) 0%, var(--sehat-navy-light) 48%, #1a3a2f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.sehat-auth-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(249, 115, 22, 0.28), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 90% 90%, rgba(13, 148, 136, 0.22), transparent 50%);
+  pointer-events: none;
+}
+
+.sehat-auth-card {
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(14px);
+  border-radius: var(--sehat-radius);
+  box-shadow: var(--sehat-shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+  animation: sehat-fade-up 0.4s ease-out;
+}
+
+.sehat-auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+.sehat-auth-brand .brand-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--sehat-orange), var(--sehat-navy-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sehat-white);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.sehat-auth-brand h1 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--sehat-navy);
+  margin: 0;
+  line-height: 1.25;
+}
+
+/* ——— App shell ——— */
+.sehat-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sehat-sidebar {
+  width: var(--sehat-sidebar-width);
+  background: linear-gradient(180deg, var(--sehat-navy) 0%, #0e2a4a 100%);
+  color: var(--sehat-white);
+  flex-shrink: 0;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 1040;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
+}
+
+.sehat-sidebar-brand {
+  min-height: var(--sehat-topbar-height);
+  padding: 0 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sehat-sidebar-brand .logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--sehat-orange), #fb923c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
+  flex-shrink: 0;
+}
+
+.sehat-sidebar-brand .brand-text {
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.sehat-sidebar-brand .brand-sub {
+  font-size: 0.68rem;
+  opacity: 0.6;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.sehat-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0.75rem;
+}
+
+.sehat-nav-section {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.45;
+  padding: 0.85rem 0.85rem 0.4rem;
+  font-weight: 600;
+}
+
+.sehat-nav-section:first-child {
+  padding-top: 0.25rem;
+}
+
+.sehat-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 2px;
+  border-radius: var(--sehat-radius-sm);
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+  border: 0;
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.sehat-nav-link i {
+  font-size: 1.05rem;
+  width: 1.25rem;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.sehat-nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.sehat-nav-link.active {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.95), rgba(234, 88, 12, 0.9));
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(249, 115, 22, 0.28);
+}
+
+.sehat-sidebar > .p-3 {
+  padding: 0.85rem 0.75rem 1.1rem !important;
+}
+
+.sehat-main {
+  flex: 1;
+  margin-left: var(--sehat-sidebar-width);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 100vh;
+}
+
+.sehat-topbar {
+  height: var(--sehat-topbar-height);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--sehat-border);
+  padding: 0 var(--sehat-space);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.sehat-topbar-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--sehat-navy);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.sehat-content {
+  padding: var(--sehat-space);
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+}
+
+@media (max-width: 991.98px) {
+  .sehat-sidebar {
+    transform: translateX(-100%);
+  }
+  .sehat-sidebar.show {
+    transform: translateX(0);
+    box-shadow: 0 0 0 100vw rgba(11, 31, 58, 0.35);
+  }
+  .sehat-main {
+    margin-left: 0;
+  }
+  .sehat-content {
+    padding: 1.15rem;
+  }
+}
+
+/* ——— Page header ——— */
+.sehat-page-header,
+.sehat-content > .d-flex.justify-content-between.mb-4,
+.sehat-content > .d-flex.justify-content-between.align-items-center.mb-4,
+.sehat-content > .d-flex.justify-content-between.align-items-start.mb-4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.35rem !important;
+}
+
+/* Avoid double titles: if page header starts with subtitle only, keep compact */
+.sehat-page-header > .sehat-page-subtitle:first-child {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.page-title,
+.sehat-page-header h1,
+.sehat-page-header h2,
+.sehat-content > h1.page-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--sehat-navy);
+  letter-spacing: -0.025em;
+  margin: 0 0 0.2rem;
+  line-height: 1.25;
+}
+
+/* When topbar already shows the page name, content H1 can stay for list pages */
+.sehat-content > .sehat-page-header .page-title {
+  font-size: 1.35rem;
+}
+
+.sehat-page-subtitle,
+.sehat-content .text-muted.mb-0 {
+  font-size: 0.9rem;
+  color: var(--sehat-muted) !important;
+}
+
+/* ——— Cards ——— */
+.sehat-card {
+  background: var(--sehat-white);
+  border: 1px solid var(--sehat-border);
+  border-radius: var(--sehat-radius);
+  box-shadow: var(--sehat-shadow);
+  padding: 1.5rem;
+}
+
+.sehat-card > form > .row,
+.sehat-card form > .row {
+  --bs-gutter-x: 1.25rem;
+  --bs-gutter-y: 1.1rem;
+}
+
+.sehat-card-header {
+  padding: 0 0 1rem;
+  margin: 0 0 1.15rem;
+  border-bottom: 1px solid var(--sehat-border);
+  font-weight: 700;
+  color: var(--sehat-navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.sehat-card-body {
+  padding: 0;
+}
+
+.sehat-card .table-responsive,
+.sehat-card > .table,
+.sehat-card .sehat-table {
+  margin: 0;
+}
+
+/* ——— Stats ——— */
+.sehat-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.sehat-stat-card,
+.sehat-stat {
+  background: var(--sehat-white);
+  border-radius: var(--sehat-radius);
+  padding: 1.25rem;
+  border: 1px solid var(--sehat-border);
+  box-shadow: var(--sehat-shadow);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.sehat-stat-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 88px;
+  height: 88px;
+  background: linear-gradient(135deg, transparent 40%, rgba(249, 115, 22, 0.1));
+  border-radius: 0 0 0 100%;
+}
+
+.sehat-stat-label,
+.sehat-stat .stat-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--sehat-muted);
+  margin-bottom: 0.4rem;
+}
+
+.sehat-stat-value,
+.sehat-stat .stat-value {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--sehat-navy);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.sehat-stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Class names kept; colors swapped: .teal → orange look, .orange → green look */
+.sehat-stat-icon.teal {
+  background: var(--sehat-orange-soft);
+  color: var(--sehat-orange);
+}
+.sehat-stat-icon.orange {
+  background: var(--sehat-teal-soft);
+  color: var(--sehat-teal);
+}
+.sehat-stat-icon.navy {
+  background: rgba(11, 31, 58, 0.08);
+  color: var(--sehat-navy);
+}
+
+/* ——— Buttons ——— */
+.btn {
+  font-weight: 600;
+  border-radius: var(--sehat-radius-sm);
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1.1rem;
+}
+
+.btn-sm {
+  min-height: 34px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-sehat-primary,
+.btn-sehat-teal {
+  background: linear-gradient(135deg, var(--sehat-orange), #fb923c);
+  border: none;
+  color: #fff !important;
+  box-shadow: 0 6px 14px rgba(249, 115, 22, 0.25);
+}
+
+.btn-sehat-primary:hover,
+.btn-sehat-primary:focus,
+.btn-sehat-teal:hover,
+.btn-sehat-teal:focus {
+  background: linear-gradient(135deg, var(--sehat-orange-hover), var(--sehat-orange));
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(249, 115, 22, 0.32);
+}
+
+.btn-sehat-accent {
+  background: linear-gradient(135deg, var(--sehat-teal), var(--sehat-teal-light));
+  border: none;
+  color: #fff !important;
+  box-shadow: 0 6px 14px rgba(13, 148, 136, 0.22);
+}
+
+.btn-sehat-accent:hover,
+.btn-sehat-accent:focus {
+  background: linear-gradient(135deg, #0f766e, var(--sehat-teal));
+  color: #fff !important;
+}
+
+.btn-sehat-outline {
+  border: 1.5px solid var(--sehat-orange);
+  color: var(--sehat-orange);
+  background: transparent;
+}
+
+.btn-sehat-outline:hover {
+  background: var(--sehat-orange-soft);
+  color: var(--sehat-orange-hover);
+  border-color: var(--sehat-orange);
+}
+
+.btn-sehat-ghost {
+  background: #fff;
+  border: 1px solid var(--sehat-border);
+  color: #475569;
+}
+
+.btn-sehat-ghost:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: var(--sehat-navy);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--sehat-orange);
+  --bs-btn-border-color: var(--sehat-orange);
+  --bs-btn-hover-bg: var(--sehat-orange);
+  --bs-btn-hover-border-color: var(--sehat-orange);
+  --bs-btn-active-bg: var(--sehat-orange-hover);
+  --bs-btn-active-border-color: var(--sehat-orange-hover);
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: #475569;
+  --bs-btn-border-color: #cbd5e1;
+  --bs-btn-hover-bg: #f1f5f9;
+  --bs-btn-hover-border-color: #94a3b8;
+  --bs-btn-hover-color: var(--sehat-navy);
+}
+
+/* ——— Badges ——— */
+.sehat-badge,
+.badge-sehat {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  background: #f1f5f9;
+  color: #475569;
+  line-height: 1.2;
+}
+
+.sehat-badge-active,
+.badge-active,
+.badge-ready {
+  background: var(--sehat-teal-soft);
+  color: #0f766e;
+}
+.sehat-badge-inactive,
+.badge-inactive,
+.badge-pending,
+.badge-provisioning {
+  background: #f1f5f9;
+  color: #64748b;
+}
+.sehat-badge-pending {
+  background: var(--sehat-orange-soft);
+  color: #c2410c;
+}
+.sehat-badge-expired,
+.badge-expired,
+.badge-failed,
+.badge-cancelled,
+.badge-suspended {
+  background: rgba(220, 38, 38, 0.12);
+  color: #b91c1c;
+}
+.sehat-badge-trial,
+.badge-trial,
+.badge-scheduled,
+.sehat-badge-scheduled {
+  background: var(--sehat-orange-soft);
+  color: #c2410c;
+}
+.sehat-badge-completed {
+  background: var(--sehat-teal-soft);
+  color: var(--sehat-teal);
+}
+
+/* ——— Forms ——— */
+.sehat-form-label,
+.sehat-app label.form-label,
+.sehat-app .form-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--sehat-navy);
+  margin-bottom: 0.45rem;
+  line-height: 1.3;
+}
+
+.sehat-form-control,
+.sehat-app .form-control,
+.sehat-app .form-select {
+  min-height: var(--sehat-control-h);
+  border-radius: var(--sehat-radius-sm);
+  border: 1.5px solid #c9d4e3;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(11, 31, 58, 0.03);
+  width: 100%;
+}
+
+.sehat-app textarea.form-control {
+  min-height: 96px;
+  padding-top: 0.7rem;
+}
+
+.sehat-form-control:focus,
+.sehat-app .form-control:focus,
+.sehat-app .form-select:focus {
+  border-color: var(--sehat-orange);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.16);
+}
+
+.sehat-app .form-control::placeholder {
+  color: #94a3b8;
+}
+
+.sehat-app .form-control:disabled,
+.sehat-app .form-control[readonly] {
+  background: #f8fafc;
+  color: #64748b;
+}
+
+.sehat-app .row.g-3,
+.sehat-app .row.g-2 {
+  --bs-gutter-x: 1.25rem;
+}
+
+.sehat-app .row.g-3 {
+  --bs-gutter-y: 1.1rem;
+}
+
+.sehat-app .row.g-2 {
+  --bs-gutter-y: 0.85rem;
+}
+
+.sehat-app .form-check-input:checked {
+  background-color: var(--sehat-orange);
+  border-color: var(--sehat-orange);
+}
+
+.sehat-app .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(249, 115, 22, 0.2);
+}
+
+/* Equal-width utility for city/state/country style rows */
+.sehat-app .row > [class*="col-"] {
+  min-width: 0;
+}
+
+/* ——— Toolbar / filters inside cards ——— */
+.sehat-card > form.row,
+.sehat-card form.row.g-2.mb-3 {
+  margin-bottom: 1.15rem !important;
+  align-items: center;
+}
+
+/* ——— Tables ——— */
+.sehat-table-wrap {
+  border-radius: var(--sehat-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--sehat-border);
+}
+
+.sehat-table,
+.sehat-app .table {
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  vertical-align: middle;
+}
+
+.sehat-app .table thead,
+.sehat-table thead {
+  background: #f8fafc;
+}
+
+.sehat-app .table thead th,
+.sehat-table thead th {
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--sehat-muted);
+  border-bottom: 1px solid var(--sehat-border);
+  padding: 0.9rem 1rem;
+  white-space: nowrap;
+}
+
+.sehat-app .table tbody td,
+.sehat-table tbody td {
+  padding: 0.9rem 1rem;
+  border-color: #f1f5f9;
+  color: #334155;
+}
+
+.sehat-app .table tbody tr:hover {
+  background: rgba(249, 115, 22, 0.035);
+}
+
+.sehat-app .table-responsive {
+  border-radius: var(--sehat-radius-sm);
+}
+
+/* ——— OTP ——— */
+.sehat-otp-group {
+  display: flex;
+  gap: 0.55rem;
+  justify-content: center;
+}
+
+.sehat-otp-input {
+  width: 48px;
+  height: 52px;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--sehat-radius-sm);
+  color: var(--sehat-navy);
+}
+
+.sehat-otp-input:focus {
+  outline: none;
+  border-color: var(--sehat-orange);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.18);
+}
+
+/* ——— Alerts ——— */
+.sehat-alert {
+  border-radius: var(--sehat-radius-sm);
+  border: none;
+  font-size: 0.9rem;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.sehat-alert-success {
+  background: var(--sehat-teal-soft);
+  color: #0f766e;
+}
+
+.sehat-alert-danger {
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
+}
+
+.sehat-alert-warning {
+  background: var(--sehat-orange-soft);
+  color: #c2410c;
+}
+
+.sehat-grace-banner {
+  background: linear-gradient(90deg, rgba(13, 148, 136, 0.14), rgba(13, 148, 136, 0.04));
+  border: 1px solid rgba(13, 148, 136, 0.3);
+  border-radius: var(--sehat-radius-sm);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.875rem;
+  color: #115e59;
+}
+
+/* ——— Landing ——— */
+.sehat-landing {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--sehat-navy) 0%, var(--sehat-navy-light) 45%, #1a3a2f 100%);
+  color: var(--sehat-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sehat-landing::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.28), transparent 70%);
+  top: -160px;
+  right: -120px;
+}
+
+.sehat-landing::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.22), transparent 70%);
+  bottom: -140px;
+  left: -100px;
+}
+
+.sehat-landing-hero {
+  position: relative;
+  z-index: 1;
+}
+
+.sehat-landing-hero h1 {
+  font-size: clamp(2.1rem, 5vw, 3.1rem);
+  font-weight: 800;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.03em;
+}
+
+.sehat-landing-hero p {
+  font-size: 1.08rem;
+  opacity: 0.88;
+  max-width: 520px;
+  margin: 0 auto 2rem;
+}
+
+.sehat-landing-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: center;
+}
+
+/* ——— Misc ——— */
+.btn-sehat-loading {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@keyframes sehat-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sehat-fade-in {
+  animation: sehat-fade-up 0.35s ease-out;
+}
+
+.sehat-empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--sehat-muted);
+}
+
+.sehat-app .pagination {
+  margin-top: 1.15rem;
+  margin-bottom: 0;
+  gap: 0.25rem;
+}
+
+.sehat-app .pagination .page-link {
+  border-radius: var(--sehat-radius-sm) !important;
+  color: var(--sehat-orange);
+  border-color: var(--sehat-border);
+  min-width: 36px;
+  text-align: center;
+}
+
+.sehat-app .pagination .page-item.active .page-link {
+  background: var(--sehat-orange);
+  border-color: var(--sehat-orange);
+  color: #fff;
+}
+
+.text-sehat-teal { color: var(--sehat-teal) !important; }
+.text-sehat-navy { color: var(--sehat-navy) !important; }
+.text-sehat-orange { color: var(--sehat-orange) !important; }
+
+code {
+  background: #f1f5f9;
+  color: var(--sehat-navy);
+  border-radius: 6px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.82em;
+}
+
+/* Action button groups in tables */
+.sehat-app td.text-end {
+  white-space: nowrap;
+}
+
+.sehat-app td.text-end .btn + .btn,
+.sehat-app td.text-end form {
+  margin-left: 0.25rem;
+}
+
+.sehat-app td.text-end form.d-inline {
+  display: inline-block !important;
+}
